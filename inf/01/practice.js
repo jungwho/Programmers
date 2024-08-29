@@ -60,10 +60,13 @@ let res05 = l.reduce((acc, cur) => {
   return acc + cur;
 }, 5);
 let res06 = l.reduce((acc, cur) => acc - cur, 100);
+let res07 = l.reduce((acc, cur) => acc + cur ** 2);
+let res08 = l.reduce((acc, cur) => acc + cur ** 2, 0);
 
 console.log(res04);
 console.log(res05);
 console.log(res06);
+console.log(res07, res08);
 
 // splice
 
