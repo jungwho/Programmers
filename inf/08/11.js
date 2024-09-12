@@ -1,15 +1,12 @@
 // 팩토리얼
 
 const solution = (n) => {
-  const DFS = (k, sum) => {
-    if (k === 0) {
-      console.log(sum);
-      return;
-    }
-    sum *= k;
-    DFS(k - 1, sum);
+  const DFS = (k) => {
+    if (k === 1) return 1;
+    else return k * DFS(k - 1);
   };
-  DFS(n, 1);
+
+  return DFS(n);
 };
 
 console.log(solution(5));
