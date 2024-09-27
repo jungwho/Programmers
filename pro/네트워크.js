@@ -1,21 +1,25 @@
 function solution(n, computers) {
   var answer = 0;
-  const DFS = (i, l) => {
-    l.push(i);
-    console.log(i, l);
-    for (let k = 0; k < n; k++) {
-      if (!l.indexOf(k) && l[i][k] === 1) {
-        DFS(k, l);
+  let checkList = Array.from({ length: n }, (x) => 0);
+
+  const DFS = (x) => {
+    checkList[x] = 1;
+    let flag = false;
+    for (let i = 0; i < n; i++) {
+      if (!checkList[i] && computers[x][i]) {
+        flag = true;
+        checkList[i] = 1;
+        DFS(i);
       }
     }
-    answer++;
-
-    return;
+    if (!flag) {
+      answer++;
+      return;
+    }
   };
-  for (let j = 0; j < n; j++) {
-    DFS(j, []);
+  for (let i = 0; i < n; i++) {
+    DFS(i);
   }
-
   return answer;
 }
 
@@ -33,3 +37,21 @@ console.log(
     [0, 1, 1],
   ])
 );
+
+function solution(n, computers) {
+  var answer = 0;
+  let checkList = Array.from({ length: n }, (x) => 0);
+  const DFS = (x) => {
+    checkList[x] = 1;
+    for (let i = 0; i < n; i++) {
+      if (checkList[i] === 0 && computers[x][i] === 1) {
+        DFS(i);
+      }
+    }
+  };
+  for (let i = 0; i < n; i++) {
+    DFS(i);
+    answer++;
+  }
+  return answer;
+}
