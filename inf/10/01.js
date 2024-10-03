@@ -1,40 +1,13 @@
-// 경로 탐색
+// 계단오르기
 
-const solution = (n, l) => {
-  let answer = 0;
-  let arr = Array.from(Array(n + 1), (x) => Array(n + 1).fill(0));
-
-  for (let [a, b] of l) {
-    arr[a][b] = 1;
+const solution = () => {
+  let dy = Array(8).fill(0);
+  dy[1] = 1;
+  dy[2] = 2;
+  for (let i = 3; i <= 7; i++) {
+    dy[i] = dy[i - 1] + dy[i - 2];
   }
-  let ck = Array.from(Array(n + 1).fill(0));
-  const DFS = (x) => {
-    if (x === n) {
-      answer++;
-    }
-    for (let i = 1; i <= n; i++) {
-      if (arr[x][i] === 1 && ck[i] === 0) {
-        ck[i] = 1;
-        DFS(i);
-        ck[i] = 0;
-      }
-    }
-  };
-  ck[1] = 1;
-  DFS(1);
-  return answer;
+  return dy[7];
 };
 
-console.log(
-  solution(5, [
-    [1, 2],
-    [1, 3],
-    [1, 4],
-    [2, 1],
-    [2, 3],
-    [2, 5],
-    [3, 4],
-    [4, 2],
-    [4, 5],
-  ])
-);
+console.log(solution(7));
